@@ -6,7 +6,7 @@ contract Archimedes is StandardToken {
     
     string public name = "Archimedes";
     string public symbol = "ARC";
-    uint public decimals = 18;//decimals = 3, 1000 symbols to see 1.00 in Mist or Ethereum Wallet, if you have only 1symbols you will see 0.001.
+    uint public decimals = 18;//decimals = 3, 1000 symbols to see 1.00 in Mist , if you have 1symbols you'll see 0.001
     uint public maxSup;
     uint public totalSup;
     address public owner;
@@ -38,12 +38,11 @@ contract Archimedes is StandardToken {
 
         totalSup += _value;
         balances[msg.sender] += _value;
-        
     }
     
-    /*************************************
-    *   // ありがとうメッセージを送る(set)と、100ARCも一緒に送られる(transfer)
-    *************************************/ 
+    /**********************************************************************
+    *   // function thanks  ありがとうメッセージを送る(set)と、100ARCも一緒に送られる(transfer)
+    ***********************************************************************/ 
     function thanks(address _to, string _message) public {
         thanksMessage[_to] = _message;
         transfer(_to, 100e18);
@@ -51,13 +50,18 @@ contract Archimedes is StandardToken {
     }
     
     /*************************************
-    *   // 最新ありがとうメッセージを見る
+    *   //  function thanksMessage 最新ありがとうメッセージを見る
     *************************************/ 
     function thanksMessage(address _address) public constant returns (string) {
         return thanksMessage[_address];
     }
 
-
+    /************************************************************
+    *   // function kill  to destruct this contract             
+    ************************************************************/ 
+    function kill() public onlyOwner {
+        selfdestruct(owner);
+    }
 
 
 

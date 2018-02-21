@@ -1,20 +1,35 @@
 *truffle*
+
+-Default-
 truffle compile 
-truffle development
-migrate
+truffle develop
+migrate  
+
+-ganache-
+truffle compile 
+truffle console --network ganache (or truffle migrate --network ganache then truffle console --network ganache)
+migrate 
+
 
 *truffle console*
-Check accounts:     web3.eth.accounts
-initialize:         arc = Archimedes.at(Archimedes.address)
-checkName:          arc.name()
-transferToken:      arc.transfer(web3.eth.accounts[1],15151e18)
-checkBalanceOf:     arc.balanceOf(web3.eth.accounts[1])
 
-thanks:             arc.thanks("0xf17f52151EbEF6C7334FAD080c5704D77216b732","Thank you for bought Token")
-thanksCheck:        arc.thanksMessage("0xf17f52151EbEF6C7334FAD080c5704D77216b732")
+-Commands-
+CheckavAvailableAccounts:   web3.eth.accounts
+substitute for param:       exam = web3.eth.accounts[0]
 
+-contracts-
+initializeContract:         arc = Archimedes.at(Archimedes.address)
+checkContractName:          arc.name()
+transferToken:              arc.transfer(web3.eth.accounts[1],15151e18)
+checkBalanceOf:             arc.balanceOf(web3.eth.accounts[1])
 
-                    arc.transfer(0xC5fdf4076b8F3A5357c5E395ab970B5B54098Fef,15151e18)
+-thanksFunctionsCommands-
+thanks:                     arc.thanks("0xf17f52151EbEF6C7334FAD080c5704D77216b732","Thank you for bought Token")
+thanksCheck:                arc.thanksMessage("0xf17f52151EbEF6C7334FAD080c5704D77216b732")
+
+-ethereumCommands-
+accountBalanceOfEther:      web3.eth.getBalance(web3.eth.accounts[0])
+sendEthertoAccoounts:       web3.eth.sendTransaction({ from: fromAccount, to: toAccount, value: web3.toWei(0, "ether")})                
 
 
 
