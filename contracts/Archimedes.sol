@@ -3,15 +3,21 @@ import "zeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
 
 
 contract Archimedes is StandardToken {
-  
+    
     string public name = "Archimedes";
     string public symbol = "ARC";
-    uint public decimals = 18;
-    //decimals = 3, 1000 symbols to see 1.00 in Mist or Ethereum Wallet, if you have only 1symbols you will see 0.001.
+    uint public decimals = 18;//decimals = 3, 1000 symbols to see 1.00 in Mist or Ethereum Wallet, if you have only 1symbols you will see 0.001.
     uint public maxSup;
     uint public totalSup;
     address public owner;
     mapping (address=>string) public thanksMessage;
+
+    event MessageLog(string);
+
+    modifier onlyOwner() {
+        require(owner == msg.sender);
+        _;
+    }
 
     /*************************************
     *     // function Archimedes
@@ -26,8 +32,8 @@ contract Archimedes is StandardToken {
     /*************************************
     *       // function addTotalSupply
     *************************************/ 
-    function addTotalSupply(uint256 _value) public {
-        require(owner == msg.sender);
+    function addTotalSupply(uint256 _value) public onlyOwner {
+        //require(owner == msg.sender);
         require(maxSup >= (totalSup + _value));
 
         totalSup += _value;
@@ -41,6 +47,7 @@ contract Archimedes is StandardToken {
     function thanks(address _to, string _message) public {
         thanksMessage[_to] = _message;
         transfer(_to, 100e18);
+       
     }
     
     /*************************************
